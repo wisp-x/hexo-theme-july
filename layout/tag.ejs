@@ -1,0 +1,18 @@
+
+<div id="tag">
+  <h3 class="widget-title"><%=page.tag%></h3>
+  <% page.posts.each(article => { %>
+    <div class="tag-item">
+      <a href="<%=url_for(article.path)%>">
+        <%=article.title%>
+      </a>
+      <time datetime="<%=date_xml(article.date)%>">
+        <%=date(article.date, 'MMMM DD, YYYY')%>
+      </time>
+    </div>
+  <% }) %>
+</div>
+
+<div id="paginator">
+  <%-paginator()%>
+</div>

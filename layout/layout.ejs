@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+<head>
+    <meta charset="UTF-8">
+    <%
+    var title = page.title;
+
+    if (is_archive()) {
+        title = __('archive_a');
+
+        if (is_month()) {
+            title += ': ' + page.year + '/' + page.month;
+        } else if (is_year()) {
+            title += ': ' + page.year;
+        }
+    } else if (is_category()) {
+        title = __('category') + ': ' + page.category;
+    } else if (is_tag()) {
+        title = __('tag') + ': ' + page.tag;
+    }
+    %>
+    <title>
+        <% if (title){ %><%= title %> |
+        <% } %>
+        <%= config.title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- open_graph({
+        twitter_id: theme.twitter,
+        google_plus: theme.google_plus,
+        fb_admins: theme.fb_admins,
+        fb_app_id: theme.fb_app_id
+    }) %>
+    <% if (theme.rss){ %>
+        <link rel="alternate" href="<%= url_for(theme.rss) %>" title="<%= config.title %>" type="application/atom+xml">
+    <% } %>
+    <% if (theme.favicon){ %>
+        <link rel="icon" href="<%- theme.favicon %>">
+    <% } %>
+    <% if (theme.stylesheets !== undefined && theme.stylesheets.length > 0) { %>
+        <% theme.stylesheets.forEach(url => { %>
+            <link rel="stylesheet" href="<%= url %>">
+        <% }); %>
+    <% } %>
+</head>
+<body>
+
+<div id="banner-outer" class="<% if (theme.site.banner === undefined) { %>hidden<% } %>">
+    <div id="banner-image" style="background-image: url(<%= theme.site.banner %>)"></div>
+    <img src="<%= theme.site.avatar %>" id="avatar">
+</div>
+
+<div id="menu-outer">
+    <div id="menu-inner">
+        <% Object.keys(theme.menu).forEach(key => { %>
+            <a class="<%- is_current(theme.menu[key]) && 'active' %>" href="<%= theme.menu[key] %>"><%= key %></a>
+        <% }); %>
+    </div>
+</div>
+
+<div id="content-outer" class="container">
+    <div id="content-inner">
+        <%- body %>
+    </div>
+</div>
+
+<div id="bottom-outer">
+    <div id="bottom-inner">
+        2019-<%= date(null, 'YYYY') %> <%= config.author %> <%= theme.site.icp %>
+    </div>
+</div>
+
+<div id="to-top">
+    <i class="iconfont icon-up"></i>
+</div>
+
+<% if (theme.scripts !== undefined && theme.scripts.length > 0) { %>
+    <% theme.scripts.forEach(url => { %>
+        <script src="<%= url %>"></script>
+    <% }); %>
+<% } %>
+
+<% if (is_post()) { %>
+    <script>
+      $(function () {
+        $('#banner-outer').addClass('fade-out')
+        $('#menu-outer').addClass('fade-show')
+
+        $('pre').each(function (i, block) {
+          hljs.highlightBlock(block);
+        });
+      })
+    </script>
+<% } %>
+
+<script>
+  $(function () {
+    $(window).scroll(function () {
+      if ($(window).scrollTop() > 150) {
+        $("#to-top").fadeIn();
+      } else {
+        $("#to-top").fadeOut();
+      }
+    });
+    $("#to-top").click(function () {
+      $("body,html").animate({scrollTop: 0}, 500);
+      return false;
+    })
+  })
+</script>
+</body>
+</html>

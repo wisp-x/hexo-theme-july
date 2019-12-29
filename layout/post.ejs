@@ -1,0 +1,13 @@
+<article id="post">
+    <h1 id="post-title"><%= page.title %></h1>
+    <time id="post-date" datetime="<%=page.date.toJSON()%>">
+        <%=date(page.date, 'MMMM DD, YYYY')%>
+    </time>
+    <div id="post-content" class="markdown-body">
+        <%- page.content %>
+    </div>
+</article>
+
+<div id="paginator">
+    <%- paginator() %>
+</div>
