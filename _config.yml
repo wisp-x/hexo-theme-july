@@ -8,7 +8,7 @@ menu:
   About: /about/index.html
 
 site:
-  banner: /img/banner.jpg # banner map of website. (please annotation this line if you don't need it)
+  # banner: /img/banner.jpg # banner map of website. (please annotation this line if you don't need it)
   avatar: https://www.gravatar.com/avatar/7a585313ed855e8d652cbb3154a6056e?s=300&d=mm&r=g # head portrait.
   icp: 皖ICP备16011445号 # E-ICP prepared No.
 
