@@ -46,6 +46,12 @@ highlight:
 ...
 ```
 
+Create Page
+---
+```
+$ hexo new page about
+```
+
 Update
 ---
 ```
