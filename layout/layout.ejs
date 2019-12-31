@@ -38,7 +38,7 @@
     <% } %>
     <% if (theme.stylesheets !== undefined && theme.stylesheets.length > 0) { %>
         <% theme.stylesheets.forEach(url => { %>
-            <link rel="stylesheet" href="<%= url %>">
+            <link rel="stylesheet" href="<%= config.url + url %>">
         <% }); %>
     <% } %>
 </head>
@@ -52,7 +52,7 @@
 <div id="menu-outer">
     <div id="menu-inner">
         <% Object.keys(theme.menu).forEach(key => { %>
-            <a class="<%- is_current(theme.menu[key]) && 'active' %>" href="<%= theme.menu[key] %>"><%= key %></a>
+            <a class="<%- is_current(theme.menu[key]) && 'active' %>" href="<%= config.url + theme.menu[key] %>"><%= key %></a>
         <% }); %>
     </div>
 </div>
@@ -75,7 +75,7 @@
 
 <% if (theme.scripts !== undefined && theme.scripts.length > 0) { %>
     <% theme.scripts.forEach(url => { %>
-        <script src="<%= url %>"></script>
+        <script src="<%= config.url + url %>"></script>
     <% }); %>
 <% } %>
 

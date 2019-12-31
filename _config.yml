@@ -20,7 +20,7 @@ stylesheets:
 # scripts loaded in the end of the body
 scripts:
   - /js/jquery-3.4.1.min.js
-  - //cdn.bootcss.com/highlight.js/9.13.1/highlight.min.js
+  - /js/highlight-9.13.1.min.js
   - /js/transition.js
   - /js/smooth-scroll.min.js
 
